@@ -1,0 +1,28 @@
+{
+  "name": "sii-2023-2024",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MinoruAmaya/SII-2023-2024.git"
+  },
+  "keywords": [
+    "leaflet"
+  ],
+  "author": "Lena,Dominik,Andreas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MinoruAmaya/SII-2023-2024/issues"
+  },
+  "homepage": "https://github.com/MinoruAmaya/SII-2023-2024#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "leaflet": "^1.9.4",
+    "nodemon": "^3.0.1"
+  }
+}
