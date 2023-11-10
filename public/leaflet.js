@@ -31,13 +31,20 @@ map.on("draw:created", function(event){
     drawnFeatures.addLayer(layer);
 })
 
-
 // Add custom uploadbutton with EasyButton
-var uploadButton = L.easyButton('fa-upload', function(btn, map){
-    // Code to handle the upload button click
-    document.getElementById('file-input').click();
-    // You can add your custom logic here, like opening a file input dialog for uploads
+var uploadButton = L.easyButton({
+    states:[{
+        stateName: 'upload-Button',
+        icon: '<img src="https://raw.githubusercontent.com/MinoruAmaya/SII-2023-2024/main/upload_icon.png" style="width: 15px; height: 15px;">',
+        titel: 'UploadButton',
+        onClick: function(btn, map){
+            // Code to handle the upload button click
+            document.getElementById('file-input').click();
+            // You can add your custom logic here, like opening a file input dialog for uploads
+        }
+    }]
 }).addTo(map);
+
         // Event-Handler for the file input change
         document.getElementById('file-input').addEventListener('change', function (e) {
             var file = e.target.files[0];
