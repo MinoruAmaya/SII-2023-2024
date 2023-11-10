@@ -31,6 +31,17 @@ map.on("draw:created", function(event){
     drawnFeatures.addLayer(layer);
 })
 
+
+// Add custom uploadbutton with EasyButton
+var uploadButton = L.easyButton('<img src="upload_icon.png"/>', function(btn, map){
+    // Code to handle the upload button click
+    alert('Upload button clicked!');
+    // You can add your custom logic here, like opening a file input dialog for uploads
+}).addTo(map);
+
+
+
+
 // show the scale bar on the lower left corner
 L.control.scale({imperial: true, metric: true}).addTo(map);
 
