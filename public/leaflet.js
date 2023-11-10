@@ -33,11 +33,27 @@ map.on("draw:created", function(event){
 
 
 // Add custom uploadbutton with EasyButton
-var uploadButton = L.easyButton('<img src="upload_icon.png"/>', function(btn, map){
+var uploadButton = L.easyButton('fa-upload', function(btn, map){
     // Code to handle the upload button click
-    alert('Upload button clicked!');
+    document.getElementById('file-input').click();
     // You can add your custom logic here, like opening a file input dialog for uploads
 }).addTo(map);
+        // Event-Handler for the file input change
+        document.getElementById('file-input').addEventListener('change', function (e) {
+            var file = e.target.files[0];
+            if (!file) return;
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                var geojson = JSON.parse(e.target.result);
+                // Add GeoJSON data to the map
+                L.geoJSON(geojson).addTo(map);
+                // Center the map on the added GeoJSON data
+                if (geojson.features.length > 0) {
+                    map.fitBounds(L.geoJSON(geojson).getBounds());
+                }
+            };
+            reader.readAsText(file);
+        });
 
 
 
