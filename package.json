@@ -21,7 +21,9 @@
   },
   "homepage": "https://github.com/MinoruAmaya/SII-2023-2024#readme",
   "dependencies": {
+    "ajax": "^0.0.4",
     "express": "^4.18.2",
+    "jquery": "^3.7.1",
     "leaflet": "^1.9.4",
     "leaflet-easybutton": "^2.4.0",
     "nodemon": "^3.0.1"

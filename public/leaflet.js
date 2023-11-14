@@ -31,7 +31,12 @@ map.on("draw:created", function(event){
     drawnFeatures.addLayer(layer);
 })
 
+// show the scale bar on the lower left corner
+L.control.scale({imperial: true, metric: true}).addTo(map);
+
+//----------------------------------------------
 // Add custom uploadbutton with EasyButton
+//----------------------------------------------
 var uploadButton = L.easyButton({
     states:[{
         stateName: 'upload-Button',
@@ -44,34 +49,67 @@ var uploadButton = L.easyButton({
         }
     }]
 }).addTo(map);
-
-        // Event-Handler for the file input change
-        document.getElementById('file-input').addEventListener('change', function (e) {
-            var file = e.target.files[0];
-            if (!file) return;
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                var geojson = JSON.parse(e.target.result);
-                // Add GeoJSON data to the map
-                L.geoJSON(geojson).addTo(map);
-                // Center the map on the added GeoJSON data
-                if (geojson.features.length > 0) {
-                    map.fitBounds(L.geoJSON(geojson).getBounds());
-                }
-            };
-            reader.readAsText(file);
-        });
-
-
+// Event-Handler for the file input change
+document.getElementById('file-input').addEventListener('change', function (e) {
+    var file = e.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        var geojson = JSON.parse(e.target.result);
+        // Add GeoJSON data to the map
+        L.geoJSON(geojson).addTo(map);
+        // Center the map on the added GeoJSON data
+        if (geojson.features.length > 0) {
+            map.fitBounds(L.geoJSON(geojson).getBounds());
+        }
+    };
+    reader.readAsText(file);
+});
+//----------------------------------------------
 
 
-// show the scale bar on the lower left corner
-L.control.scale({imperial: true, metric: true}).addTo(map);
+//----------------------------------------------
+// Add additional custom uploadbutton with EasyButton and ajax/jquery
+//----------------------------------------------
+var uploadButton_AJAX = L.easyButton({
+    states:[{
+        stateName: 'upload-Button_AJAX',
+        icon: '<img src="https://raw.githubusercontent.com/MinoruAmaya/SII-2023-2024/main/upload_icon.png" style="width: 15px; height: 15px;">',
+        titel: 'UploadButton_AJAX',
+        onClick: function(btn, map){
+            $('#file-input_ajax').click();
+        }
+    }]
+}).addTo(map);
+// Event listener for file input change
+$('#file-input_ajax').change(function (e) {
+    var file = e.target.files[0];
+    if (file) {
+        // Read the file as text
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            var geojson = JSON.parse(e.target.result);
+            // Add GeoJSON data to the map
+            L.geoJSON(geojson).addTo(map);
+            // Center the map on the added GeoJSON data
+            if (geojson.features.length > 0) {
+                map.fitBounds(L.geoJSON(geojson).getBounds());
+            }
+        };
+        reader.readAsText(file);
+    }
+});
+//----------------------------------------------
 
+
+
+
+//----------------------------------------------
 // show a marker on the map
+//----------------------------------------------
 L.marker({lon: 7.6258, lat: 51.9625}).bindPopup('Münster').addTo(map);
 
-// Koordinaten für das Polygon
+// coordinates for the Polygon
 var Naturschutzgebiet_1_Coords = [
     [52.01340138770027,7.637725446349549],
     [52.01345321595235,7.651863664385303],
@@ -103,7 +141,7 @@ var Naturschutzgebiet_1_Coords = [
     [52.01340138770027,7.637725446349549,]
   ];
 
-// Koordinaten für das Polygon
+// coordinates for the Polygon
 var Naturschutzgebiet_2_Coords = [
     [51.91775468011119,7.737237548633999],
     [51.91443145681694,7.739445015758179],
